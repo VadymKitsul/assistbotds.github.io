@@ -10,10 +10,34 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 1));
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 1));
             color: #00ffcc;
-            overflow: hidden; /* Скрыть стандартный скролл */
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYklEQVR42mP8//8/w38GIAXD0RELiw4sJkkbqB0nAzAEAc6BzAAMtaKk+AAAAAElFTkSuQmCC') 10 10, auto; /* Киберпанковый курсор */
+            overflow: hidden;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYklEQVR42mP8//8/w38GIAXD0RELiw4sJkkbqB0nAzAEAc6BzAAMtaKk+AAAAAElFTkSuQmCC') 10 10, auto;
+            position: relative;
+        }
+
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 255, 204, 0.1),
+                rgba(0, 255, 204, 0.1) 10px,
+                rgba(0, 0, 0, 0.1) 10px,
+                rgba(0, 0, 0, 0.1) 20px
+            );
+            z-index: 0;
+            opacity: 0.5;
+            animation: bgMove 5s linear infinite;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
         }
 
         .container {
@@ -26,8 +50,10 @@
             backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* Позволить прокрутку внутри контейнера */
-            height: 90vh; /* Задаем высоту контейнера */
+            overflow-y: auto;
+            height: 90vh;
+            position: relative;
+            z-index: 1; /* Ensure container is above background animation */
         }
 
         h1 {
@@ -54,7 +80,7 @@
         }
 
         ul {
-            list-style-type: none; /* Убираем маркеры */
+            list-style-type: none;
             padding: 0;
             margin: 10px 0;
         }
@@ -113,45 +139,33 @@
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
         }
 
-        /* Снежинки */
-        .snowflake {
-            position: absolute;
-            color: rgba(0, 255, 204, 0.2);
-            pointer-events: none; /* Не мешает взаимодействию с другими элементами */
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(100vh) translateX(-50%); }
-        }
-
         /* Стилизация прокрутки для вебkit-браузеров (Chrome, Safari) */
         ::-webkit-scrollbar {
-            width: 12px; /* Ширина полосы прокрутки */
+            width: 12px;
         }
         
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1); /* Цвет фона полосы прокрутки */
+            background: rgba(255, 255, 255, 0.1);
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #00cc99; /* Цвет ползунка полосы прокрутки */
+            background: #00cc99;
             border-radius: 6px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: #008e6d; /* Цвет ползунка при наведении */
+            background: #008e6d;
         }
 
         /* Стилизация прокрутки для Firefox */
         * {
-            scrollbar-width: thin; /* Размер полосы прокрутки */
-            scrollbar-color: #00cc99 rgba(255, 255, 255, 0.1); /* Цвет ползунка и фона */
+            scrollbar-width: thin;
+            scrollbar-color: #00cc99 rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
     <div class="container">
         <h1><i class="fa-solid fa-robot"></i> AssistBot</h1>
         <p>Добро пожаловать в мир возможностей с нашим <i class="fa-solid fa-robot"></i> AssistBot!</p>
@@ -191,35 +205,44 @@
 
         <a href="https://discord.gg/2PuFtJ8bsY" target="_blank" class="cta"><i class="fa-brands fa-discord"></i> Присоединяйтесь к нашему Discord</a>
         <a href="https://discord.com/oauth2/authorize?client_id=1337205802594729984&integration_type=1&scope=applications.commands" target="_blank" class="cta"><i class="fa-solid fa-key"></i> Авторизация через Discord</a>
-
     </div>
 
-    <!-- Снежинки -->
     <script>
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = '❄'; // Снежинка
-            snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'rem'; // Случайный размер
-            snowflake.style.left = Math.random() * window.innerWidth + 'px'; // Случайная позиция по X
-
-            // Установка случайной анимации
-            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Случайная скорость падения
-            snowflake.style.animationDelay = Math.random() * 2 + 's'; // Случайная задержка
-
-            // Добавление снежинки на страницу
-            document.body.appendChild(snowflake);
-
-            // Удаление снежинки после анимации
-            snowflake.addEventListener('animationend', () => {
-                snowflake.remove();
-            });
-
-            // Повторный вызов функции через случайный промежуток времени
-            setTimeout(createSnowflake, Math.random() * 500); // Более частая генерация
-        }
-
-        createSnowflake(); // Запуск генерации снежинок
+        // Пример простого графика на Chart.js
+        const ctx = document.getElementById('statsChart').getContext('2d');
+        const statsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
+                datasets: [{
+                    label: 'Активные пользователи',
+                    data: [12000, 15000, 13000, 17000, 16000, 18000],
+                    backgroundColor: 'rgba(0, 255, 204, 0.6)',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: "rgba(255, 255, 255, 0.1)",
+                        },
+                    },
+                    x: {
+                        grid: {
+                            color: "rgba(255, 255, 255, 0.1)",
+                        },
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#00ffcc'
+                        }
+                    },
+                },
+            }
+        });
     </script>
 
 </body>
