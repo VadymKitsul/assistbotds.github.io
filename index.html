@@ -44,6 +44,10 @@
             margin: auto;
             position: relative;
             z-index: 1;
+            height: calc(100vh - 80px); /* Задаем высоту для прокрутки */
+            overflow-y: auto; /* Включаем вертикальную прокрутку */
+            background: rgba(30, 30, 30, 0.9); /* Фон для прокручиваемой области */
+            border-radius: 10px;
         }
 
         .header {
