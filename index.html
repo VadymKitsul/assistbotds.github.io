@@ -54,6 +54,11 @@
             margin-bottom: 20px;
         }
 
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         h1 {
             font-size: 3rem;
             margin: 0;
@@ -76,6 +81,9 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: 0.3s;
             margin-bottom: 20px; /* Добавлено расстояние между карточками */
+            width: 45%; /* Ширина карточек */
+            display: inline-block; /* Чтобы разместить карточки в ряд */
+            vertical-align: top; /* Выравнивание карточек по вертикали */
         }
 
         .card:hover {
@@ -144,6 +152,44 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
 
+        /* Дропдаун */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #00ffcc;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         /* Стилизация прокрутки для вебkit-браузеров (Chrome, Safari) */
         ::-webkit-scrollbar {
             width: 10px;
@@ -170,13 +216,22 @@
     <div class="container">
         <div class="header">
             <h1>✨ AssistBot - Ваш умный помощник! ✨</h1>
+            <div class="dropdown">
+                <button class="dropbtn">Меню</button>
+                <div class="dropdown-content">
+                    <a href="#section1">Раздел 1</a>
+                    <a href="#section2">Раздел 2</a>
+                    <a href="#section3">Раздел 3</a>
+                </div>
+            </div>
         </div>
-        <div class="card">
+
+        <!-- Карточки -->
+        <div class="card" id="section1">
             <h2>Почему выбирают AssistBot?</h2>
             <p>AssistBot — это ваш надежный помощник для автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
         </div>
-        
-        <div class="card">
+        <div class="card" id="section2">
             <h2>Ключевые преимущества</h2>
             <ul>
                 <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах</li>
@@ -186,8 +241,7 @@
                 <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка</li>
             </ul>
         </div>
-
-        <div class="card">
+        <div class="card" id="section3">
             <h2>Как купить?</h2>
             <ol>
                 <li>Авторизуйте бота через кнопку в меню.</li>
@@ -234,6 +288,10 @@
             <p>Мы команда профессионалов, готовых предоставить лучший сервис пользователям AssistBot. Свяжитесь с нами через социальные сети!</p>
             <a href="https://discord.gg/2PuFtJ8bsY" target="_blank" class="cta"><i class="fa-brands fa-discord"></i> Присоединяйтесь к нашему Discord</a>
             <a href="https://discord.com/oauth2/authorize?client_id=1337205802594729984&integration_type=1&scope=applications.commands" target="_blank" class="cta"><i class="fa-solid fa-key"></i> Авторизация через Discord</a>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Все права защищены.</p>
         </div>
     </div>
 
