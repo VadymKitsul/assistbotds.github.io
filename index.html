@@ -10,10 +10,10 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 1));
-            color: #00ffcc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #EAEAEA;
             overflow: hidden;
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYklEQVR42mP8//8/w38GIAXD0RELiw4sJkkbqB0nAzAEAc6BzAAMtaKk+AAAAAElFTkSuQmCC') 10 10, auto;
+            cursor: pointer;
             position: relative;
         }
 
@@ -23,91 +23,73 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0, 255, 204, 0.1),
-                rgba(0, 255, 204, 0.1) 10px,
-                rgba(0, 0, 0, 0.1) 10px,
-                rgba(0, 0, 0, 0.1) 20px
-            );
             z-index: 0;
-            opacity: 0.5;
-            animation: bgMove 5s linear infinite;
-        }
-
-        @keyframes bgMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
+            opacity: 0.1;
         }
 
         .container {
             max-width: 800px;
             margin: auto;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 255, 204, 0.5);
-            backdrop-filter: blur(15px);
+            padding: 40px;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
             height: 90vh;
             position: relative;
-            z-index: 1; /* Ensure container is above background animation */
+            z-index: 1;
         }
 
         h1 {
             font-size: 2.5rem;
             text-align: center;
-            margin: 1rem 0;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 1);
-            border-bottom: 2px solid rgba(0, 255, 204, 0.5);
-            padding-bottom: 10px;
+            margin: 0;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(251, 252, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin: 1.5rem 0;
-            font-weight: bold;
             color: #00ffcc;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
         p, ul {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
             margin: 10px 0;
+            line-height: 1.5;
         }
 
         ul {
             list-style-type: none;
             padding: 0;
-            margin: 10px 0;
         }
 
         li {
-            background: rgba(0, 255, 204, 0.1);
+            background: rgba(0, 255, 204, 0.2);
             padding: 12px;
-            margin: 5px 0;
-            border-radius: 8px;
-            transition: background 0.3s ease-in-out;
+            margin: 10px 0;
+            border-radius: 10px;
+            transition: background 0.3s ease;
         }
 
         li:hover {
-            background: rgba(0, 255, 204, 0.3);
+            background: rgba(0, 255, 204, 0.4);
         }
 
         .stats-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            opacity: 0.9;
         }
         
         .stats-table th, .stats-table td {
             padding: 12px;
-            border: 1px solid rgba(0, 255, 204, 0.2);
-            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            background: rgba(30, 30, 30, 0.7);
             text-align: center;
         }
 
@@ -121,31 +103,26 @@
             display: inline-block;
             margin: 20px 0;
             padding: 15px 30px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            color: #000000;
+            color: #FFFFFF;
             text-align: center;
-            background: linear-gradient(145deg, #00ffcc, #00cc99);
+            background: #00ffcc;
             border: none;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .cta:hover {
-            background: linear-gradient(145deg, #00e6b3, #00b389);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+            background: #00b389;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
 
         /* Стилизация прокрутки для вебkit-браузеров (Chrome, Safari) */
         ::-webkit-scrollbar {
-            width: 12px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            width: 10px;
         }
         
         ::-webkit-scrollbar-thumb {
@@ -154,13 +131,13 @@
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: #008e6d;
+            background: #00b389;
         }
 
         /* Стилизация прокрутки для Firefox */
         * {
             scrollbar-width: thin;
-            scrollbar-color: #00cc99 rgba(255, 255, 255, 0.1);
+            scrollbar-color: #00cc99 transparent;
         }
     </style>
 </head>
@@ -171,15 +148,15 @@
         <p>Добро пожаловать в мир возможностей с нашим <i class="fa-solid fa-robot"></i> AssistBot!</p>
 
         <h2>Почему выбирают AssistBot?</h2>
-        <p>AssistBot — это ваш надежный помощник, который предоставляет невероятные функции для продвижения и автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
+        <p>AssistBot — это ваш надежный помощник для автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
 
         <h2>Ключевые преимущества</h2>
         <ul>
-            <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах без необходимости присутствия</li>
-            <li><i class="fa-solid fa-cog"></i> Легкая настройка и интуитивно понятный интерфейс</li>
-            <li><i class="fa-solid fa-paper-plane"></i> Возможность массовой рассылки сообщений</li>
-            <li><i class="fa-solid fa-lock"></i> Полная безопасность и защита данных</li>
-            <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка клиентов</li>
+            <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах</li>
+            <li><i class="fa-solid fa-cog"></i> Легкая настройка и понятный интерфейс</li>
+            <li><i class="fa-solid fa-paper-plane"></i> Массовая рассылка сообщений</li>
+            <li><i class="fa-solid fa-lock"></i> Полная безопасность данных</li>
+            <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка</li>
         </ul>
 
         <table class="stats-table">
@@ -208,7 +185,6 @@
     </div>
 
     <script>
-        // Пример простого графика на Chart.js
         const ctx = document.getElementById('statsChart').getContext('2d');
         const statsChart = new Chart(ctx, {
             type: 'bar',
@@ -217,7 +193,7 @@
                 datasets: [{
                     label: 'Активные пользователи',
                     data: [12000, 15000, 13000, 17000, 16000, 18000],
-                    backgroundColor: 'rgba(0, 255, 204, 0.6)',
+                    backgroundColor: 'rgba(0, 255, 204, 0.7)',
                 }]
             },
             options: {
@@ -237,7 +213,7 @@
                 plugins: {
                     legend: {
                         labels: {
-                            color: '#00ffcc'
+                            color: '#EAEAEA'
                         }
                     },
                 },
