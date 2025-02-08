@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ AssistBot - Ваш умный помощник! ✨</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         body {
@@ -27,18 +26,11 @@
             pointer-events: none; /* Игнорировать события мыши для фона */
         }
 
-        .snow {
-            position: absolute;
-            background: rgba(255, 255, 0, 0.8);
-            border-radius: 50%;
-            opacity: 0.8;
-            pointer-events: none; /* Игнорировать события мыши для снега */
-        }
-
         .container {
             padding: 40px;
             display: flex;
-            flex-direction: column; /* Изменено на колонку для полной высоты */
+            flex-wrap: wrap; /* Позволяет карточкам быть в двух рядах */
+            justify-content: space-between; /* Распределяем карточки по ширине */
             max-width: 1200px;
             margin: auto;
             position: relative;
@@ -57,6 +49,7 @@
         .footer {
             text-align: center;
             margin-top: 20px;
+            position: relative; /* Для абсолютного позиционирования */
         }
 
         h1 {
@@ -81,9 +74,9 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: 0.3s;
             margin-bottom: 20px; /* Добавлено расстояние между карточками */
-            width: 45%; /* Ширина карточек */
-            display: inline-block; /* Чтобы разместить карточки в ряд */
-            vertical-align: top; /* Выравнивание карточек по вертикали */
+            width: calc(45% - 20px); /* Ширина карточек */
+            position: relative; /* Для абсолютного позиционирования следа */
+            overflow: hidden; /* Прячем следы, если они выходят за пределы карточки */
         }
 
         .card:hover {
@@ -209,29 +202,31 @@
             scrollbar-width: thin;
             scrollbar-color: #00cc99 transparent;
         }
+
+        /* Стиль для следа за курсором */
+        .snow {
+            position: absolute;
+            background: rgba(255, 255, 0, 0.8);
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none; /* Игнорировать события мыши для следа */
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
     <div class="container">
-        <div class="header">
-            <h1>✨ AssistBot - Ваш умный помощник! ✨</h1>
-            <div class="dropdown">
-                <button class="dropbtn">Меню</button>
-                <div class="dropdown-content">
-                    <a href="#section1">Раздел 1</a>
-                    <a href="#section2">Раздел 2</a>
-                    <a href="#section3">Раздел 3</a>
-                </div>
-            </div>
-        </div>
+        <h1>✨ AssistBot - Ваш умный помощник! ✨</h1>
 
         <!-- Карточки -->
-        <div class="card" id="section1">
+        <div class="card">
             <h2>Почему выбирают AssistBot?</h2>
             <p>AssistBot — это ваш надежный помощник для автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
         </div>
-        <div class="card" id="section2">
+        <div class="card">
             <h2>Ключевые преимущества</h2>
             <ul>
                 <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах</li>
@@ -241,7 +236,7 @@
                 <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка</li>
             </ul>
         </div>
-        <div class="card" id="section3">
+        <div class="card">
             <h2>Как купить?</h2>
             <ol>
                 <li>Авторизуйте бота через кнопку в меню.</li>
@@ -249,7 +244,6 @@
                 <li>Напишите в тикет для дальнейшего оформления.</li>
             </ol>
         </div>
-
         <div class="card">
             <h2>Как получить бесплатно?</h2>
             <ol>
@@ -258,7 +252,6 @@
                 <p><i>Кто это?</i> Пиар-менеджер — это тот, кто приглашает людей на сервер (от 7 человек).</p>
             </ol>
         </div>
-
         <div class="card">
             <h2>Статистика пользователей</h2>
             <table class="stats-table">
@@ -278,11 +271,9 @@
                 </tbody>
             </table>
         </div>
-
         <div class="chart-container">
             <canvas id="statsChart"></canvas>
         </div>
-
         <div class="card">
             <h2>Наша команда</h2>
             <p>Мы команда профессионалов, готовых предоставить лучший сервис пользователям AssistBot. Свяжитесь с нами через социальные сети!</p>
@@ -296,33 +287,12 @@
     </div>
 
     <script>
-        // Создание эффекта снега
-        function createSnow() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snow');
-            snowflake.style.width = `${Math.random() * 15 + 5}px`; // Радиус снега
-            snowflake.style.height = snowflake.style.width; // Квадратные снежинки
-            snowflake.style.left = `${Math.random() * 100}%`; // Позиция по ширине
-            snowflake.style.animationDuration = `${Math.random() * 3 + 3}s`; // Разная скорость падения
-            snowflake.style.opacity = `${Math.random() * 0.5 + 0.5}`; // Случайная прозрачность
-            document.body.appendChild(snowflake);
-
-            // Удаляем снежинку через 5 секунд после создания
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
-        }
-
         // Создание эффекта следа за курсором
         document.addEventListener('mousemove', (e) => {
             const cursorEffect = document.createElement('div');
             cursorEffect.classList.add('snow');
-            cursorEffect.style.width = '20px'; // Ширина следа
-            cursorEffect.style.height = '20px'; // Высота следа
             cursorEffect.style.left = `${e.pageX}px`;
-            cursorEffect.style.top = `${e.pageY}px`;
-            cursorEffect.style.position = 'absolute';
-            cursorEffect.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            cursorEffect.style.top = `${e.pageY - 20}px`; // Поднимаем эффект выше
             document.body.appendChild(cursorEffect);
             setTimeout(() => {
                 cursorEffect.style.transform = 'scale(0)';
@@ -332,9 +302,6 @@
                 cursorEffect.remove();
             }, 300);
         });
-
-        // Запускаем эффект падения снежинок
-        setInterval(createSnow, 300); // Каждые 300 миллисекунд создавать снежинку
 
         // Пример простого графика на Chart.js
         const ctx = document.getElementById('statsChart').getContext('2d');
