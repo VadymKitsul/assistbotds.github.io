@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssistBot | MrKr3xx</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(30, 30, 60, 1));
+            color: #ffffff;
+            overflow: hidden; /* Скрыть стандартный скролл */
+            position: relative;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYklEQVR42mP8//8/w38GIAXD0RELiw4sJkkbqB0nAzAEAc6BzAAMtaKk+AAAAAElFTkSuQmCC') 10 10, auto; /* Желтый курсор */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            height: 90vh; /* Задаем высоту контейнера */
+            overflow-y: auto; /* Позволить прокрутку внутри контейнера */
+            backdrop-filter: blur(10px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        p, ul {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style-type: none; /* Убираем маркеры */
+            padding: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+        
+        .stats-table th, .stats-table td {
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .cta {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(145deg, #ffcc00, #fbbd1d);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .cta:hover {
+            background: linear-gradient(145deg, #ffee00, #f8d57e);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Снежинки */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #ffffff;
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0.8; 
+            animation: fall linear infinite;
+            transform: translateZ(0); /* Для создания 3D эффекта */
+            filter: blur(1px); /* Легкое размытие для 3D эффекта */
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(100vh) translateX(-50%); }
+        }
+
+        /* Стилизация прокрутки для вебkit-браузеров (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Ширина полосы прокрутки */
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Цвет фона полосы прокрутки */
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888; /* Цвет ползунка полосы прокрутки */
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Цвет ползунка при наведении */
+        }
+
+        /* Стилизация прокрутки для Firefox */
+        * {
+            scrollbar-width: thin; /* Размер полосы прокрутки */
+            scrollbar-color: #888 #f1f1f1; /* Цвет ползунка и фона */
+        }
+
+        /* Анимация скрытого текста */
+        .hidden-text {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hidden-text.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-robot"></i> AssistBot</h1>
+        <p>Добро пожаловать в мир возможностей с нашим <i class="fa-solid fa-robot"></i> AssistBot!</p>
+
+        <h2>Почему выбирают AssistBot?</h2>
+        <p>AssistBot — это ваш надежный помощник, который предоставляет невероятные функции для продвижения и автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
+
+        <h2>Ключевые преимущества</h2>
+        <ul>
+            <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах без необходимости присутствия</li>
+            <li><i class="fa-solid fa-cog"></i> Легкая настройка и интуитивно понятный интерфейс</li>
+            <li><i class="fa-solid fa-paper-plane"></i> Возможность массовой рассылки сообщений</li>
+            <li><i class="fa-solid fa-lock"></i> Полная безопасность и защита данных</li>
+            <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка клиентов</li>
+        </ul>
+
+        <table class="stats-table">
+            <tr>
+                <th><i class="fa-solid fa-users"></i> Активные пользователи</th>
+                <th><i class="fa-solid fa-shopping-cart"></i> Покупатели</th>
+                <th><i class="fa-solid fa-globe"></i> Онлайн</th>
+            </tr>
+            <tr>
+                <td>15,730</td>
+                <td>6,890</td>
+                <td>1,145</td>
+            </tr>
+        </table>
+
+        <div class="chart-container">
+            <canvas id="statsChart"></canvas>
+        </div>
+
+        <a href="https://discord.gg/2PuFtJ8bsY" target="_blank" class="cta"><i class="fa-brands fa-discord"></i> Присоединяйтесь к нашему Discord</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1337205802594729984&integration_type=1&scope=applications.commands" target="_blank" class="cta"><i class="fa-solid fa-key"></i> Авторизация через Discord</a>
+
+    </div>
+
+    <!-- Снежинки -->
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄'; // Снежинка
+            snowflake.style.fontSize = Math.random() * 2 + 0.5 + 'rem'; // Случайный размер
+            snowflake.style.left = Math.random() * window.innerWidth + 'px'; // Случайная позиция по X
+
+            // Установка случайной анимации
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Случайная скорость падения
+            snowflake.style.animationDelay = Math.random() * 2 + 's'; // Случайная задержка
+
+            // Добавление снежинки на страницу
+            document.body.appendChild(snowflake);
+
+            // Удаление снежинки после анимации
+            snowflake.addEventListener('animationend', () => {
+                snowflake.remove();
+            });
+
+            // Повторный вызов функции через случайный промежуток времени
+            setTimeout(createSnowflake, Math.random() * 500); // Более частая генерация
+        }
+
+        createSnowflake(); // Запуск генерации снежинок
+
+        // Показать скрытый текст
+        document.getElementById('show-hidden-text').addEventListener('click', function() {
+            const hiddenText = document.getElementById('hidden-text');
+            hiddenText.classList.toggle('show');
+        });
+    </script>
+
+<script src="https://static.app/js/static.js" type="text/javascript"></script>
+</body>
+</html>
