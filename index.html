@@ -12,9 +12,9 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #EAEAEA;
-            overflow: hidden;
-            cursor: pointer;
             position: relative;
+            overflow: hidden;
+            cursor: none; /* Убираем стандартный курсор */
         }
 
         .bg-animation {
@@ -23,8 +23,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.1;
+            background: rgba(255, 255, 204, 0.1);
+            pointer-events: none; /* Игнорировать события мыши для фона */
+        }
+
+        .snow {
+            position: absolute;
+            background: rgba(255, 255, 0, 0.6);
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none; /* Игнорировать события мыши для снега */
         }
 
         .container {
@@ -139,6 +147,7 @@
             scrollbar-width: thin;
             scrollbar-color: #00cc99 transparent;
         }
+
     </style>
 </head>
 <body>
@@ -185,6 +194,47 @@
     </div>
 
     <script>
+        // Создание эффекта снега
+        function createSnow() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snow');
+            snowflake.style.width = `${Math.random() * 15 + 5}px`; // Радиус снега
+            snowflake.style.height = snowflake.style.width; // Квадратные снежинки
+            snowflake.style.left = `${Math.random() * 100}%`; // Позиция по ширине
+            snowflake.style.animationDuration = `${Math.random() * 3 + 3}s`; // Разная скорость падения
+            snowflake.style.opacity = `${Math.random() * 0.5 + 0.5}`; // Случайная прозрачность
+            document.body.appendChild(snowflake);
+
+            // Удаляем снежинку через 5 секунд после создания
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Создание эффекта следа за курсором
+        document.addEventListener('mousemove', (e) => {
+            const cursorEffect = document.createElement('div');
+            cursorEffect.classList.add('snow');
+            cursorEffect.style.width = '20px'; // Ширина следа
+            cursorEffect.style.height = '20px'; // Высота следа
+            cursorEffect.style.left = `${e.pageX}px`;
+            cursorEffect.style.top = `${e.pageY}px`;
+            cursorEffect.style.position = 'absolute';
+            cursorEffect.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            document.body.appendChild(cursorEffect);
+            setTimeout(() => {
+                cursorEffect.style.transform = 'scale(0)';
+                cursorEffect.style.opacity = '0';
+            }, 10);
+            setTimeout(() => {
+                cursorEffect.remove();
+            }, 300);
+        });
+
+        // Запускаем эффект падения снежинок
+        setInterval(createSnow, 300); // Каждые 300 миллисекунд создавать снежинку
+
+        // Пример простого графика на Chart.js
         const ctx = document.getElementById('statsChart').getContext('2d');
         const statsChart = new Chart(ctx, {
             type: 'bar',
@@ -220,6 +270,5 @@
             }
         });
     </script>
-
 </body>
 </html>
