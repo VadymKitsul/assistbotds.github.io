@@ -13,37 +13,38 @@
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(30, 30, 60, 1));
             color: #ffffff;
             overflow: hidden; /* Скрыть стандартный скролл */
-            position: relative;
             cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYklEQVR42mP8//8/w38GIAXD0RELiw4sJkkbqB0nAzAEAc6BzAAMtaKk+AAAAAElFTkSuQmCC') 10 10, auto; /* Желтый курсор */
         }
 
         .container {
             max-width: 800px;
             margin: auto;
-            padding: 20px;
+            padding: 30px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            height: 90vh; /* Задаем высоту контейнера */
-            overflow-y: auto; /* Позволить прокрутку внутри контейнера */
-            backdrop-filter: blur(10px);
-            position: relative;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
+            overflow-y: auto; /* Позволить прокрутку внутри контейнера */
+            height: 90vh; /* Задаем высоту контейнера */
         }
 
         h1 {
             font-size: 2.5rem;
             text-align: center;
             margin: 1rem 0;
-            text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.9);
+            border-bottom: 2px solid rgba(255, 204, 0, 0.5);
+            padding-bottom: 10px;
         }
 
         h2 {
             font-size: 1.8rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            font-weight: bold;
             color: #ffcc00;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
         p, ul {
@@ -55,11 +56,19 @@
         ul {
             list-style-type: none; /* Убираем маркеры */
             padding: 0;
+            margin: 10px 0;
         }
 
         li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        li:hover {
+            background: rgba(255, 204, 0, 0.2);
         }
 
         .stats-table {
@@ -70,11 +79,12 @@
         }
         
         .stats-table th, .stats-table td {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.05);
+            text-align: center;
         }
-        
+
         .chart-container {
             width: 100%;
             max-width: 600px;
@@ -88,6 +98,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: #ffffff;
+            text-align: center;
             background: linear-gradient(145deg, #ffcc00, #fbbd1d);
             border: none;
             border-radius: 8px;
@@ -105,15 +116,12 @@
         /* Снежинки */
         .snowflake {
             position: absolute;
-            top: -10px;
             color: #ffffff;
-            font-size: 1rem;
-            pointer-events: none;
             opacity: 0.8; 
             animation: fall linear infinite;
-            transform: translateZ(0); /* Для создания 3D эффекта */
-            filter: blur(1px); /* Легкое размытие для 3D эффекта */
+            filter: blur(1px);
         }
+
         @keyframes fall {
             0% { transform: translateY(0) translateX(0); }
             100% { transform: translateY(100vh) translateX(-50%); }
@@ -125,11 +133,12 @@
         }
         
         ::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Цвет фона полосы прокрутки */
+            background: rgba(255, 255, 255, 0.1); /* Цвет фона полосы прокрутки */
         }
         
         ::-webkit-scrollbar-thumb {
             background: #888; /* Цвет ползунка полосы прокрутки */
+            border-radius: 6px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
@@ -139,7 +148,7 @@
         /* Стилизация прокрутки для Firefox */
         * {
             scrollbar-width: thin; /* Размер полосы прокрутки */
-            scrollbar-color: #888 #f1f1f1; /* Цвет ползунка и фона */
+            scrollbar-color: #888 rgba(255, 255, 255, 0.1); /* Цвет ползунка и фона */
         }
 
         /* Анимация скрытого текста */
@@ -171,16 +180,20 @@
         </ul>
 
         <table class="stats-table">
-            <tr>
-                <th><i class="fa-solid fa-users"></i> Активные пользователи</th>
-                <th><i class="fa-solid fa-shopping-cart"></i> Покупатели</th>
-                <th><i class="fa-solid fa-globe"></i> Онлайн</th>
-            </tr>
-            <tr>
-                <td>15,730</td>
-                <td>6,890</td>
-                <td>1,145</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th><i class="fa-solid fa-users"></i> Активные пользователи</th>
+                    <th><i class="fa-solid fa-shopping-cart"></i> Покупатели</th>
+                    <th><i class="fa-solid fa-globe"></i> Онлайн</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15,730</td>
+                    <td>6,890</td>
+                    <td>1,145</td>
+                </tr>
+            </tbody>
         </table>
 
         <div class="chart-container">
@@ -200,6 +213,7 @@
             snowflake.innerHTML = '❄'; // Снежинка
             snowflake.style.fontSize = Math.random() * 2 + 0.5 + 'rem'; // Случайный размер
             snowflake.style.left = Math.random() * window.innerWidth + 'px'; // Случайная позиция по X
+            snowflake.style.opacity = Math.random(); // Случайная непрозрачность
 
             // Установка случайной анимации
             snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Случайная скорость падения
@@ -214,18 +228,11 @@
             });
 
             // Повторный вызов функции через случайный промежуток времени
-            setTimeout(createSnowflake, Math.random() * 500); // Более частая генерация
+            setTimeout(createSnowflake, Math.random() * 300); // Более частая генерация
         }
 
         createSnowflake(); // Запуск генерации снежинок
-
-        // Показать скрытый текст
-        document.getElementById('show-hidden-text').addEventListener('click', function() {
-            const hiddenText = document.getElementById('hidden-text');
-            hiddenText.classList.toggle('show');
-        });
     </script>
 
-<script src="" type="text/javascript"></script>
 </body>
 </html>
