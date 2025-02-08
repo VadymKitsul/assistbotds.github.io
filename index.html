@@ -29,7 +29,7 @@
         .container {
             padding: 40px;
             display: flex;
-            flex-wrap: wrap; /* Позволяет карточкам быть в двух рядах */
+            flex-wrap: wrap; /* Позволяет карточкам быть в два ряда */
             justify-content: space-between; /* Распределяем карточки по ширине */
             max-width: 1200px;
             margin: auto;
@@ -43,7 +43,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px; /* Увеличил отступ до 40px */
+            margin-bottom: 40px; /* Отступ после заголовка */
         }
 
         .footer {
@@ -73,11 +73,14 @@
             padding: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: 0.3s;
-            margin-bottom: 20px; /* Добавлено расстояние между карточками */
+            margin-bottom: 20px; /* Отступ между карточками */
             width: calc(45% - 20px); /* Ширина карточек */
             position: relative; /* Для абсолютного позиционирования следа */
             overflow: hidden; /* Прячем следы, если они выходят за пределы карточки */
-            margin-top: 20px; /* Добавляем отступ сверху для каждой карточки */
+        }
+
+        .card:first-child {
+            margin-top: 20px; /* Отступ сверху для первой карточки */
         }
 
         .card:hover {
