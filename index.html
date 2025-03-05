@@ -313,4 +313,21 @@
                 labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
                 datasets: [{
                     label: 'Активные пользователи',
-                   
+                    data: [1200, 1450, 1250, 1500, 1600, 1800],
+                    backgroundColor: 'rgba(0, 188, 212, 0.6)',
+                    borderColor: 'rgba(0, 188, 212, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
