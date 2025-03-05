@@ -13,7 +13,6 @@
             background-color: #1E1E1E;
             color: #F2F2F2;
             overflow: hidden;
-            cursor: none;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -56,6 +55,8 @@
             transition: all 0.3s ease-in-out;
             position: relative;
             max-width: 100%;
+            display: inline-block;
+            text-align: left;
         }
 
         .card:hover {
@@ -118,36 +119,13 @@
             color: #ccc;
         }
 
-        /* Курсор */
-        .cursor {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background-color: #00bcd4;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            animation: cursor-animation 0.3s ease-out;
+        /* Восстановление стандартного курсора */
+        body {
+            cursor: default;
         }
-
-        @keyframes cursor-animation {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.5);
-            }
-        }
-
-        .card:hover .cursor {
-            animation: none;
-        }
-
     </style>
 </head>
 <body>
-    <div class="cursor"></div>
-
     <div class="container">
         <h1>AssistBot - Ваш Умный Помощник</h1>
         
