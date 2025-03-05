@@ -3,330 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ AssistBot - Ваш умный помощник! ✨</title>
+    <title>AssistBot - Ваш Умный Помощник</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
+        /* Основные стили */
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #282c34, #1c1f26);
-            color: #EAEAEA;
-            position: relative;
+            font-family: 'Roboto', sans-serif;
+            background-color: #1E1E1E;
+            color: #F2F2F2;
             overflow: hidden;
             cursor: none;
         }
 
-        .bg-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 204, 0.05);
-            pointer-events: none;
-        }
-
         .container {
-            padding: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
             max-width: 1200px;
             margin: auto;
-            position: relative;
-            z-index: 1;
-            height: calc(100vh - 80px);
-            overflow-y: auto;
-            background: rgba(40, 44, 52, 0.9);
-            border-radius: 15px;
-        }
-
-        .header {
+            padding: 40px;
             text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            position: relative;
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin: 0;
+            font-size: 3rem;
             color: #00bcd4;
-            text-shadow: 0 0 30px rgba(0, 188, 212, 0.8);
+            margin-bottom: 20px;
+            text-shadow: 0px 4px 10px rgba(0, 188, 212, 0.6);
+        }
+
+        .card {
+            background: #2B2B2B;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         h2 {
             font-size: 1.6rem;
             color: #00bcd4;
-            margin: 15px 0;
-            text-decoration: underline;
-            text-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
-            transition: transform 0.3s ease;
-        }
-
-        h2:hover {
-            transform: scale(1.05);
-        }
-
-        .card {
-            background: rgba(30, 30, 30, 0.8);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-            margin-bottom: 25px;
-            width: calc(45% - 20px);
-            position: relative;
-        }
-
-        .card:first-child {
-            margin-top: 20px;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         p, ul {
             font-size: 1.2rem;
-            margin: 15px 0;
             line-height: 1.6;
+            margin: 0 0 20px;
+            color: #eaeaea;
         }
 
         ul {
             list-style-type: none;
-            padding: 0;
+            padding-left: 0;
         }
 
         li {
-            background: rgba(0, 188, 212, 0.2);
+            background-color: #333333;
             padding: 12px;
-            margin: 12px 0;
-            border-radius: 10px;
-            transition: background 0.3s ease;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
         }
 
         li:hover {
-            background: rgba(0, 188, 212, 0.4);
+            background-color: #00bcd4;
         }
 
-        .stats-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .stats-table th, .stats-table td {
-            padding: 12px;
-            border: 1px solid rgba(0, 188, 212, 0.3);
-            background: rgba(30, 30, 30, 0.7);
-            text-align: center;
-        }
-
-        .chart-container {
-            width: 100%;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .cta {
+        .cta-btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 15px 35px;
+            padding: 12px 30px;
+            background-color: #00bcd4;
+            color: #fff;
             font-size: 1.1rem;
-            font-weight: bold;
-            color: #FFFFFF;
-            text-align: center;
-            background: #00bcd4;
             border: none;
             border-radius: 8px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .cta:hover {
-            background: #0097a7;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: #00bcd4;
-            color: white;
-            padding: 12px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
             text-decoration: none;
-            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .dropdown-content a:hover {background-color: #f1f1f1;}
-
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .cta-btn:hover {
+            background-color: #0097a7;
+            transform: scale(1.05);
         }
 
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #00bcd4;
-            border-radius: 6px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0097a7;
+        .footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #ccc;
         }
 
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #00bcd4 transparent;
-        }
-
-        .snow {
+        /* Курсор */
+        .cursor {
             position: absolute;
-            background: rgba(255, 255, 0, 0.8);
-            border-radius: 50%;
-            opacity: 0.8;
-            pointer-events: none;
             width: 20px;
             height: 20px;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            border-radius: 50%;
+            background-color: #00bcd4;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: cursor-animation 0.3s ease-out;
         }
+
+        @keyframes cursor-animation {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <div class="cursor"></div>
+
     <div class="container">
-        <h1>✨ AssistBot - Ваш умный помощник! ✨</h1>
+        <h1>AssistBot - Ваш Умный Помощник</h1>
+        
+        <div class="card">
+            <h2>Зачем выбрать AssistBot?</h2>
+            <p>AssistBot — это уникальный инструмент для автоматизации задач, упрощения работы и улучшения взаимодействия с вашим сервером или сообществом. Экономьте время и усилия, а бот позаботится о всем остальном.</p>
+        </div>
 
         <div class="card">
-            <h2>Почему выбирают AssistBot?</h2>
-            <p>AssistBot — это ваш надежный помощник для автоматизации задач в мессенджерах. Забудьте о рутинной работе — пусть бот сделает это за вас!</p>
-        </div>
-        <div class="card">
-            <h2>Ключевые преимущества</h2>
+            <h2>Особенности</h2>
             <ul>
-                <li><i class="fa-solid fa-check"></i> Мгновенный спам в любых каналах</li>
-                <li><i class="fa-solid fa-cog"></i> Легкая настройка и понятный интерфейс</li>
-                <li><i class="fa-solid fa-paper-plane"></i> Массовая рассылка сообщений</li>
-                <li><i class="fa-solid fa-lock"></i> Полная безопасность данных</li>
-                <li><i class="fa-solid fa-question"></i> Круглосуточная поддержка</li>
+                <li><i class="fa-solid fa-check"></i> Мгновенная рассылка сообщений</li>
+                <li><i class="fa-solid fa-user"></i> Простая настройка</li>
+                <li><i class="fa-solid fa-cogs"></i> Гибкие параметры</li>
+                <li><i class="fa-solid fa-shield-alt"></i> Безопасность данных</li>
             </ul>
         </div>
+
         <div class="card">
-            <h2>Как купить?</h2>
-            <ol>
-                <li>Авторизуйте бота через кнопку в меню.</li>
-                <li>Зайдите на Discord сервер.</li>
-                <li>Напишите в тикет для дальнейшего оформления.</li>
-            </ol>
-        </div>
-        <div class="card">
-            <h2>Как получить бесплатно?</h2>
-            <ol>
-                <li>Участвовать в конкурсах.</li>
-                <li>Стать пиар-менеджером:</li>
-                <p><i>Кто это?</i> Пиар-менеджер — это тот, кто приглашает людей на сервер (от 7 человек).</p>
-            </ol>
-        </div>
-        <div class="card">
-            <h2>Статистика пользователей</h2>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        <th><i class="fa-solid fa-users"></i> Активные пользователи</th>
-                        <th><i class="fa-solid fa-shopping-cart"></i> Покупатели</th>
-                        <th><i class="fa-solid fa-globe"></i> Онлайн</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>15,730</td>
-                        <td>6,890</td>
-                        <td>1,145</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="chart-container">
-            <canvas id="statsChart"></canvas>
-        </div>
-        <div class="card">
-            <h2>Наша команда</h2>
-            <p>Мы команда профессионалов, готовых предоставить лучший сервис пользователям AssistBot. Свяжитесь с нами через социальные сети!</p>
-            <a href="https://discord.gg/2PuFtJ8bsY" target="_blank" class="cta"><i class="fa-brands fa-discord"></i> Присоединяйтесь к нашему Discord</a>
-            <a href="https://discord.com/oauth2/authorize?client_id=1337205802594729984&integration_type=1&scope=applications.commands" target="_blank" class="cta"><i class="fa-solid fa-key"></i> Добавить через Discord</a>
+            <h2>Как подключить?</h2>
+            <p>Просто подключите бота через кнопку ниже и начинайте использовать его возможности на вашем сервере.</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1337205802594729984&scope=bot" class="cta-btn">Добавить в Discord</a>
         </div>
 
         <div class="footer">
-            <p>© 2023 Все права защищены.</p>
+            <p>© 2023 AssistBot. Все права защищены.</p>
         </div>
     </div>
 
     <script>
+        // Анимация курсора
         document.addEventListener('mousemove', (e) => {
-            const cursorEffect = document.createElement('div');
-            cursorEffect.classList.add('snow');
-            cursorEffect.style.left = `${e.pageX}px`;
-            cursorEffect.style.top = `${e.pageY - 20}px`;
-            document.body.appendChild(cursorEffect);
-            setTimeout(() => {
-                cursorEffect.style.transform = 'scale(0)';
-                cursorEffect.style.opacity = '0';
-            }, 10);
-            setTimeout(() => {
-                cursorEffect.remove();
-            }, 300);
-        });
-
-        const ctx = document.getElementById('statsChart').getContext('2d');
-        const statsChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь'],
-                datasets: [{
-                    label: 'Активные пользователи',
-                    data: [1200, 1450, 1250, 1500, 1600, 1800],
-                    backgroundColor: 'rgba(0, 188, 212, 0.6)',
-                    borderColor: 'rgba(0, 188, 212, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            const cursor = document.querySelector('.cursor');
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
         });
     </script>
 </body>
