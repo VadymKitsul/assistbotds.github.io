@@ -15,25 +15,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
+            padding: 20px;
             overflow: hidden;
         }
 
-        .container {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            flex-wrap: wrap;
-        }
-
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #00bcd4;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 0px 4px 10px rgba(0, 188, 212, 0.6), 0px 0px 15px rgba(0, 188, 212, 0.8), 0px 0px 25px rgba(0, 188, 212, 0.9);
@@ -47,6 +38,14 @@
             100% {
                 text-shadow: 0px 4px 20px rgba(0, 188, 212, 1), 0px 0px 30px rgba(0, 188, 212, 1.2);
             }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .card {
@@ -130,9 +129,8 @@
     </style>
 </head>
 <body>
+    <h1>AssistBot - Ваш Умный Помощник</h1>
     <div class="container">
-        <h1>AssistBot - Ваш Умный Помощник</h1>
-        
         <div class="card">
             <h2>Зачем выбрать AssistBot?</h2>
             <p>AssistBot — это уникальный инструмент для автоматизации задач, упрощения работы и улучшения взаимодействия с вашим сервером или сообществом. Экономьте время и усилия, а бот позаботится о всем остальном.</p>
